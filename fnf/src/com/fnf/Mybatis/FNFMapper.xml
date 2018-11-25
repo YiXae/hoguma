@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com/fnf/Mybatis/FNFMapper.xml">
+<!-- SQL 문 여기에 작성, DAO SQL 문 안쓰고 최소화 시킴 -->
+	
+<!-- MemberDAO 내용 시작 -->
+
+	<!-- 회원 내 자기소개 작성 시작 -->
+	<insert id="memberintroInsert" parameterType="com.fnf.DTO.MemberDTO">			
+		INSERT INTO fnfmembertable(mphoto, midopen, mphoneopen, mjob, mintro)
+		VALUES(#{mphoto}, #{midopen}, #{mphoneopen}, #{mjob}, #{mintro})
+		WHERE bno = #{bno}
+	</insert>
+	<!-- 회원 내 자기소개 작성 끝 -->
+	
+	<!-- 회원 내 자기소개 수정 시작 -->
+	<insert id="memberintroUpdate" parameterType="com.fnf.DTO.MemberDTO">			
+		UPDATE fnfmembertable SET
+			mphoto = #{mphoto},
+			midopen = #{midopen},
+			mphoneopen = #{mphoneopen},
+			mjob = #{mjob},
+			mintro = #{mintro}			
+		WHERE bno = #{bno}    
+	</insert>
+	<!-- 회원 내 자기소개 수정 끝 -->
+	
+	<!-- 회원가입 페이지 ID 중복체크(Ajax) 시작 -->
+	<select id="confirmID" parameterType="String" resultType="String"> <!-- resultType은 select만 작성 -->
+		SELECT mid FROM fnfmembertable
+		WHERE mid = #{mid}
+	</select>
+	<!-- 회원가입 페이지 ID 중복체크(Ajax) 끝 -->
+	
+	<!-- 회원가입 페이지 별명 중복체크(Ajax) 시작 -->
+	<select id="confirmNick" parameterType="String" resultType="String"> <!-- resultType은 select만 작성 -->
+		SELECT mnick FROM fnfmembertable
+		WHERE mnick = #{mnick}
+	</select>
+	<!-- 회원가입 페이지 별명 중복체크(Ajax) 끝 -->
+	
+	<!-- 회원등록 내용 시작 -->
+	<insert id="inputMember" parameterType="com.fnf.DTO.MemberDTO">
+		INSERT INTO fnfmembertable (mno, mid, mnick, mpw, mname, mbirth, mgender, mphone, mzipcode, maddr, maddrdetail, myakyn, mpraviteyn, mlocyn, mmailingyn)
+		VALUES(seq_fnfmembertable.NEXTVAL, #{mid}, #{mnick}, #{mpw}, #{mname}, #{mbirth}, #{mgender}, #{mphone}, #{mzipcode}, #{maddr}, #{maddrdetail}, #{myakyn}, #{mpraviteyn}, #{mlocyn}, #{mmailingyn})
+	</insert>
+	<!-- 회원등록 내용 끝 -->	
+
+	<!-- 회원여부 확인 시작 -->
+	<select id="loginCheck" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO"> <!-- 로그인 성공여부는 resultType은 DTO -->
+		SELECT * FROM fnfmembertable
+		WHERE mid = #{mid} AND mpw = #{mpw}
+	</select>
+	<!-- 회원여부 확인 끝 -->
+	
+	<!-- 회원정보 수정 내용 시작 -->
+	<update id="updateMember" parameterType="com.fnf.DTO.MemberDTO">
+		UPDATE fnfmembertable SET
+		mnick = #{mnick},
+		mpw	= #{mpw},			
+		mphone = #{mphone},
+		mzipcode = #{mzipcode},
+		maddr = #{maddr},
+		maddrdetail = #{maddrdetail}
+		WHERE id = #{mid}		
+	</update>
+	<!-- 회원정보 수정 내용 끝 -->
+	
+	<!-- 회원탈퇴를 위한 Password 중복체크(Ajax) 시작 -->
+	<select id="confirmPW" parameterType="com.fnf.DTO.MemberDTO" resultType="String">
+		SELECT mid FROM fnfmembertable
+		WHERE mid = #{mid} AND mpw = #{mpw}
+	</select>
+	<!-- 회원탈퇴를 위한 Password 중복체크(Ajax) 끝 -->	
+	
+	<!-- 회원탈퇴 시작 -->
+	<update id="delID" parameterType="String">
+		DELETE FROM fnfmembertable
+		WHERE mid = #{mid}	
+	</update>
+	<!-- 회원탈퇴 끝 -->
+	
+	<!-- 아아디 찾기를 위한 회원여부 확인 시작 -->
+	<select id="idSearch" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO">
+		SELECT mid FROM fnfmembertable
+		WHERE mname = #{mname} AND mphone = #{mphone}
+	</select>
+	<!-- 아아디 찾기를 위한 회원여부 확인 끝 -->
+	
+	<!-- 비밀번호 찾기를 위한 회원여부 확인 시작 -->
+	<select id="pwSearch" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO">
+		SELECT mpw FROM fnfmembertable
+		WHERE mid = #{mid} AND mphone = #{mphone}
+	</select>
+	<!-- 아아디 찾기를 위한 회원여부 확인 끝 -->
+		
+<!-- MemberDAO 내용 끝 -->	
+
+<!-- BoardDAO 내용 시작 -->
+
+	<!-- 농수산물 게시판 리스트 생성 시작 -->	
+	<select id="boardListItem" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[
+			SELECT * FROM (SELECT rownum rnum,
+			    a.* 
+			    FROM (SELECT *
+			            FROM fafiboardtable
+			            WHERE bno > 0 ]]> 
+            
+            <if test='bitem =="농산물"'>
+            	<![CDATA[AND bitem = #{bitem} ]]>
+            </if>
+            
+            <if test='bitem =="수산물"'>
+            	<![CDATA[AND bitem = #{bitem} ]]>
+            </if>
+            
+            <if test='flag == "1"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "2"'>
+            	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "3"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "4"'>
+            	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='code == "new"'>
+            ORDER BY bno DESC
+            </if>
+
+            <if test='code == "good"'>
+            ORDER BY bgoodcnt DESC, bno DESC
+            </if>
+
+            <if test='code == "reply"'>
+            ORDER BY breplycnt DESC, bno DESC
+            </if>
+
+            <if test='code == "cnt"'>
+            ORDER BY bviewcnt DESC, bno DESC
+            </if>
+
+	<![CDATA[ 
+			    ) a			
+			)			
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}	
+		]]>
+	</select> 
+	<!-- 농수산물 게시판 리스트 생성 끝 -->
+
+	<!-- 게시판 리스트 페이징 생성 시작 -->	
+	<select id="countPaging" resultType="int">
+        <![CDATA[
+		SELECT count(bno)
+		FROM fafiboardtable
+		WHERE bno > 0 ]]>
+		
+		<if test='bitem =="농산물"'>
+            <![CDATA[AND bitem = #{bitem} ]]>
+        </if>
+            
+        <if test='bitem =="수산물"'>
+        	<![CDATA[AND bitem = #{bitem} ]]>
+        </if>
+            
+		<if test='flag =="1"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="2"'>
+        	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="3"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="4"'>
+        	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+        </if>        
+	</select>	
+	<!-- 게시판 리스트 페이징 생성 끝 -->
+	
+	<!-- 게시판 상세 페이지 시작 -->
+	<select id="boardDetailView" resultType="com.fnf.DTO.BoardDTO">
+    	SELECT * 
+        FROM fafiboardtable
+        WHERE bno = #{bno}   
+	</select>
+	<!-- 게시판 상세 페이지 끝 -->
+	
+	<!-- 게시판 조회수 올리기 시작 -->
+	<update id="viewCnt">
+    	UPDATE fafiboardtable
+    	SET bviewcnt = bviewcnt + 1
+        WHERE bno = #{bno}   
+	</update>
+	<!-- 게시판 조회수 올리기 끝 -->
+	
+	<!-- 게시판 작성 시작 -->
+	<insert id="boardInsert" parameterType="com.fnf.DTO.BoardDTO">			
+		INSERT INTO fafiboardtable(bno, btitle, bwriter, bopen, bitem, bkind, bpplace, bmainproduct, bproduct, btotalproduct, bpbirth, bprice, bsplace, bcontent, bfilename, bfilesize)
+		VALUES(seq_fafiboardtable.NEXTVAL, #{btitle}, #{bwriter}, #{bopen}, #{bitem}, #{bkind}, #{bpplace}, #{bmainproduct}, #{bproduct}, #{btotalproduct}, #{bpbirth}, #{bprice}, #{bsplace}, #{bcontent}, #{bfilename}, #{bfilesize})
+	</insert>
+	<!-- 게시판 작성 끝 -->
+		
+	<!-- 게시판 수정 시작 -->
+	<insert id="boardUpdate" parameterType="com.fnf.DTO.BoardDTO">		
+		<choose>
+			<when test="bcontent !=null">
+				UPDATE fafiboardtable SET
+					btitle = #{btitle},
+					bwriter = #{bwriter},
+					bopen = #{bopen},
+					bitem = #{bitem},
+					bkind = #{bkind},
+					bpplace = #{bpplace},
+					bmainproduct = #{bmainproduct},
+					bproduct = #{bproduct},
+					btotalproduct = #{btotalproduct},
+					bpbirth = #{bpbirth},
+					bprice = #{bprice},					
+					bsplace = #{bsplace},
+					bcontent = #{bcontent},
+					<if test="filename !='no'">
+						bfilename = #{bfilename},
+						bfilesize = #{bfilesize}
+					</if>
+				WHERE bno = #{bno}				
+			</when>
+			<otherwise>
+				UPDATE fafiboardtable SET
+					btitle = #{btitle},
+					bwriter = #{bwriter},
+					bopen = #{bopen},
+					bitem = #{bitem},
+					bkind = #{bkind},
+					bpplace = #{bpplace},
+					bmainproduct = #{bmainproduct},
+					bproduct = #{bproduct},
+					btotalproduct = #{btotalproduct},
+					bpbirth = #{bpbirth},
+					bprice = #{bprice},
+					bsplace = #{bsplace},				
+					<if test="filename !='no'">
+						bfilename = #{bfilename},
+						bfilesize = #{bfilesize}
+					</if>
+				WHERE bno = #{bno}		
+			</otherwise>
+		</choose>
+	</insert>
+	<!-- 게시판 수정 끝 -->
+	
+	<!-- 게시판 게시글 삭제 시작 -->
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM fafiboardtable
+		WHERE bno = #{bno}
+	</delete>
+	<!-- 게시판 게시글 삭제 끝 -->
+	
+	<!-- ReplyDAO -->
+	<select id="replyListAll" resultType="com.fnf.DTO.ReplyDTO" parameterType="int">
+		SELECT * FROM fnfreply
+		WHERE bno = #{bno}
+		ORDER BY rno DESC
+	</select>
+	
+	<delete id="replyDelete" parameterType="int">
+		DELETE FROM fnfreply
+		WHERE rno = #{rno}
+	</delete>	
+
+	<insert id="replyInsert" parameterType="com.fnf.DTO.ReplyDTO">
+		INSERT INTO fnfreply(rno, content, writer, bno)		
+		VALUES(seq_fnfreply_rno.NEXTVAL, #{content}, #{writer}, #{bno})	
+	</insert>
+	
+	<update id="rpPlus">
+		UPDATE fafiboardtable SET breplycnt = breplycnt + 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<update id="ReplyCntMinus">
+		UPDATE fafiboardtable SET breplycnt = breplycnt - 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<delete id="replyDeleteAll" parameterType="int">
+		DELETE FROM fnfreply
+		WHERE bno = #{bno}
+	</delete>
+	
+<!-- BoardDAO 내용 끝 -->
+
+</mapper>
+

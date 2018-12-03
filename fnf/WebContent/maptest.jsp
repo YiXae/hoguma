@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map" style="width:100%;height:550px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0bb1cb38fd36490239710319b9bbb201"></script>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -48,7 +48,7 @@ $.getJSON("map/map.geojson", function(geojson) {
     $.each(data, function(index, val) {
  
         coordinates = val.geometry.coordinates;
-        name = val.properties.CTP_ENG_NM;
+        name = val.properties.CTP_KOR_NM;
         
         displayArea(coordinates, name);
  
@@ -127,7 +127,30 @@ function displayArea(coordinates, name) {
         deletePolygon(polygons);                    //폴리곤 제거      
     });
 }
-
+//centroid 알고리즘 (폴리곤 중심좌표 구하기 위함)
+function centroid (points) {
+    var i, j, len, p1, p2, f, area, x, y;
+ 
+    area = x = y = 0;
+ 
+    for (i = 0, len = points.length, j = len - 1; i < len; j = i++) {
+            p1 = points[i];
+            p2 = points[j];
+ 
+            f = p1.y * p2.x - p2.y * p1.x;
+            x += (p1.x + p2.x) * f;
+            y += (p1.y + p2.y) * f;
+            area += f * 3;
+    }
+    return new daum.maps.LatLng(x / area, y / area);
+}
+//지도 위 표시되고 있는 폴리곤 제거
+function deletePolygon(polygons) {
+    for (var i = 0; i < polygons.length; i++) {
+        polygons[i].setMap(null);
+    }
+    polygons = [];
+}
 
 </script>
 </html>

@@ -10,8 +10,7 @@
 <!-- End WOWSlider.com HEAD section -->
 </head>
 <body>
-<div>헤이헤이~~</div>
-<div>hey2</div>
+
 	<article>		
 		<!-- 전체 body 3개의 영역으로 나누기 시작
 		     1. 좌측 전체 내용 표시 영역

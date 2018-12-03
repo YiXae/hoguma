@@ -15,5 +15,11 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="WebContent/js/billboard.js"/>
 	<classpathentry kind="lib" path="WebContent/js/billboard.min.js"/>
+	<classpathentry kind="lib" path="WebContent/css/billboard.css"/>
+	<classpathentry kind="lib" path="WebContent/css/billboard.min.css"/>
+	<classpathentry kind="lib" path="WebContent/css/insight.css"/>
+	<classpathentry kind="lib" path="WebContent/css/insight.min.css"/>
+	<classpathentry kind="lib" path="WebContent/js/chicken.json"/>
+	<classpathentry kind="lib" path="WebContent/js/TL_SCCO_CTPRVN.json"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

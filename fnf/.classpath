@@ -21,5 +21,6 @@
 	<classpathentry kind="lib" path="WebContent/css/insight.min.css"/>
 	<classpathentry kind="lib" path="WebContent/js/chicken.json"/>
 	<classpathentry kind="lib" path="WebContent/js/TL_SCCO_CTPRVN.json"/>
+	<classpathentry kind="lib" path="WebContent/map/map1.json"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

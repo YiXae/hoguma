@@ -28,7 +28,9 @@
 }
 </style>
 </head>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0bb1cb38fd36490239710319b9bbb201"></script>
+
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0bb1cb38fd36490239710319b9bbb201&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <body>
 <div id="map" class="area" style="width:100%;height:550px;"></div>
@@ -39,9 +41,9 @@
 <script>
 //행정구역 구분
 $(document).ready(function(){
-	$.get("map/map.geojson", function(geojson) {
+	$.get("map/map1.geojson", function(geojson) {
 		 
-	    var data = features;
+	    var data = geojson.features;
 	    var coordinates = [];    //좌표 저장할 배열
 	    var name = '';            //행정 구 이름
 	 
@@ -54,7 +56,7 @@ $(document).ready(function(){
 	 
 	    })
 	})
- 
+});	 
 	 
 	var polygons=[];                //function 안 쪽에 지역변수로 넣으니깐 폴리곤 하나 생성할 때마다 배열이 비어서 클릭했을 때 전체를 못 없애줌.  그래서 전역변수로 만듦.
 	    
@@ -72,7 +74,7 @@ $(document).ready(function(){
 	        path.push(new daum.maps.LatLng(coordinate[1], coordinate[0]));            //new daum.maps.LatLng가 없으면 인식을 못해서 path 배열에 추가
 	    })
 
-   
+	  
 	    // 다각형을 생성합니다 
 	    var polygon = new daum.maps.Polygon({
 	        map : map, // 다각형을 표시할 지도 객체
@@ -129,7 +131,8 @@ $(document).ready(function(){
 	    });
 	}
 	
-});	
+
 
 </script>
+
 </html>

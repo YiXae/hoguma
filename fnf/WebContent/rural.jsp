@@ -389,17 +389,9 @@ function displayArea(coordinates, name) {
   daum.maps.event.addListener(polygon, 'mouseover', function() {
       polygon.setOptions({fillColor: '#09f'});
 
-<<<<<<< HEAD
-      customOverlay.setContent('<div class="area">' + name + '</div>');
-=======
-<<<<<<< HEAD
-      
-      customOverlay.setContent('<div class="area">' + name + '</div>');
-=======
-     /*  customOverlay.setContent('<div class="area">' + name + '</div>');
->>>>>>> b0fd5365b6d408dfe247a4043a6977305ae7a119
->>>>>>> d282774e5e5f8c54a1c54c7ad4c5596ebeb804b4
-      
+
+  	 customOverlay.setContent('<div class="area">' + name + '</div>');
+
       //customOverlay.setPosition(mouseEvent.latLng); 
       customOverlay.setMap(map); // 지역이름 띄우기
   });

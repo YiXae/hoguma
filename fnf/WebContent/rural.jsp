@@ -360,8 +360,9 @@ function displayArea(coordinates, name) {
 	
 	
   // 다각형을 생성합니다 
-  if (name =="전라남도"){
-  	var polygon = new daum.maps.Polygon({
+   if (name =="전라남도" && points[0].x==34.74781836495771){ 
+	  // 전라남도에서 광주 구멍낼 폴리곤인 경우
+  	  var polygon = new daum.maps.Polygon({
           map: map, // 다각형을 표시할 지도 객체
           path: [path, hole], 
           strokeWeight: 2,
@@ -370,8 +371,7 @@ function displayArea(coordinates, name) {
           fillColor: '#fff',
           fillOpacity: 0.7 
       });
-      
-  } else {
+  } else { // 아니면 구멍 없음
 	    var polygon = new daum.maps.Polygon({
 	        map: map, // 다각형을 표시할 지도 객체
 	        path: path, 
@@ -388,17 +388,25 @@ function displayArea(coordinates, name) {
   daum.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
       polygon.setOptions({fillColor: '#09f'});
 
+<<<<<<< HEAD
       
       customOverlay.setContent('<div class="area">' + name + '</div>');
+=======
+     /*  customOverlay.setContent('<div class="area">' + name + '</div>');
+>>>>>>> b0fd5365b6d408dfe247a4043a6977305ae7a119
       
       customOverlay.setPosition(mouseEvent.latLng); 
-      customOverlay.setMap(map);
+      customOverlay.setMap(map); */
   });
   
   // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
    daum.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
       
+<<<<<<< HEAD
       customOverlay.setPosition(mouseEvent.latLng);
+=======
+      customOverlay.setPosition(mouseEvent.latLng); 
+>>>>>>> b0fd5365b6d408dfe247a4043a6977305ae7a119
   }); 
 
   // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다

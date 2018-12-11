@@ -389,38 +389,25 @@ function displayArea(coordinates, name) {
   daum.maps.event.addListener(polygon, 'mouseover', function() {
       polygon.setOptions({fillColor: '#09f'});
 
-<<<<<<< HEAD
       customOverlay.setContent('<div class="area">' + name + '</div>');
-=======
-<<<<<<< HEAD
-      
-      customOverlay.setContent('<div class="area">' + name + '</div>');
-=======
-     /*  customOverlay.setContent('<div class="area">' + name + '</div>');
->>>>>>> b0fd5365b6d408dfe247a4043a6977305ae7a119
->>>>>>> d282774e5e5f8c54a1c54c7ad4c5596ebeb804b4
       
       //customOverlay.setPosition(mouseEvent.latLng); 
       customOverlay.setMap(map); // 지역이름 띄우기
   });
   
   // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
-   daum.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
+  daum.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
       
-<<<<<<< HEAD
-      customOverlay.setPosition(mouseEvent.latLng);
-=======
       customOverlay.setPosition(mouseEvent.latLng); 
->>>>>>> b0fd5365b6d408dfe247a4043a6977305ae7a119
   }); 
 
   // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
   // 커스텀 오버레이를 지도에서 제거합니다 
-   daum.maps.event.addListener(polygon, 'mouseout', function() {
+  daum.maps.event.addListener(polygon, 'mouseout', function() {
       polygon.setOptions({fillColor: '#fff'});
       customOverlay.setMap(null); // 지역이름 뜨는 것 사라짐
   }); 
-
+ 
   // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
   daum.maps.event.addListener(polygon, 'click', function(mouseEvent) {
       var content = '<div class="info">' + 
@@ -433,7 +420,6 @@ function displayArea(coordinates, name) {
       infowindow.setMap(map);
   });
 }
-
 </script>
 <!-- 스크립트 끝 -->
 </html>

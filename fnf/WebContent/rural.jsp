@@ -17,6 +17,27 @@
 <!-- Or load different theme style -->
 <link rel="stylesheet" href="css/insight.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <style>
+.area {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 3px;
+    font-size: 12px;
+    top: -5px;
+    left: 15px;
+    padding:2px;
+} 
+
+.info {
+    font-size: 12px;
+    padding: 5px;
+}
+.info .title {
+    font-weight: bold;
+}
+</style>
 </head>
 <body>
 	<article>		
@@ -136,7 +157,7 @@
 							<!-- 검색 조건 끝 -->
 							<!-- 다음지도 API 시작 -->
 							<div class="map_wrap_rural">
-								<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+								<div id="map" style="width:100%;height:100%;"></div>
 								<div class="custom_typecontrol radius_border">
 							        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
 							        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
@@ -367,6 +388,7 @@ function displayArea(coordinates, name) {
   daum.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
       polygon.setOptions({fillColor: '#09f'});
 
+      
       customOverlay.setContent('<div class="area">' + name + '</div>');
       
       customOverlay.setPosition(mouseEvent.latLng); 
@@ -374,14 +396,14 @@ function displayArea(coordinates, name) {
   });
   
   // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
-  daum.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
+   daum.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
       
-      customOverlay.setPosition(mouseEvent.latLng); 
-  });
+      customOverlay.setPosition(mouseEvent.latLng);
+  }); 
 
   // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
   // 커스텀 오버레이를 지도에서 제거합니다 
-  daum.maps.event.addListener(polygon, 'mouseout', function() {
+   daum.maps.event.addListener(polygon, 'mouseout', function() {
       polygon.setOptions({fillColor: '#fff'});
       customOverlay.setMap(null);
   }); 

@@ -106,28 +106,88 @@
 											 	<form name="select_product">
 												 	<select id="product" name="product" title="생산품목 선택" class="formstyle_rural" onChange="showSub(this.options[this.selectedIndex].value);">
 														<option value="생산품목 선택">생산품목 선택</option>
-														<option value="곡물">곡물</option>
-														<option value="야채">야채</option>
-														<option value="과일">과일</option>
+														<option value="곡류">곡류</option>													
+														<option value="두류">두류</option>
+														<option value="과실">과실</option>
+														<option value="채소">채소</option>
+														<option value="특용작물">특용작물</option>
 													</select>
-													<select id="product1_1" name="product1_1" title="곡물 선택" class="formstyle_rural" style="display: none;">
-														<option value="곡물 선택">곡물 선택</option>
-														<option value="쌀">쌀</option>
-														<option value="보리">보리</option>
-														<option value="현미">현미</option>
+													<select id="product1_1" name="product1_1" title="곡류 선택" class="formstyle_rural" style="display: none;">
+														<option value="곡류 선택">곡류 선택</option>
+														<option value="논벼">논벼</option>
+														<option value="밭벼">밭벼</option>
+														<option value="논벼_볏짚">논벼_볏짚</option>
+														<option value="겉보리쌀보리">겉보리쌀보리</option>
+														<option value="겉보리">겉보리</option>
+														<option value="쌀보리">쌀보리</option>
+														<option value="맥주보리">맥주보리</option>
+														<option value="밀">밀</option>
+														<option value="호밀">호밀</option>
+														<option value="조">조</option>
+														<option value="수수">수수</option>
+														<option value="옥수수">옥수수</option>
+														<option value="메밀">메밀</option>
+														<option value="기타잡곡">기타잡곡</option>
 													</select>
-													<select id="product1_2" name="product1_2" title="야채 선택" class="formstyle_rural" style="display: none;">
-														<option value="야채 선택">야채 선택</option>
-														<option value="배추">배추</option>
-														<option value="고추">고추</option>
-														<option value="무">무</option>
+													<select id="product1_2" name="product1_2" title="두류 선택" class="formstyle_rural" style="display: none;">
+														<option value="두류 선택">두류 선택</option>
+														<option value="콩">콩</option>
+														<option value="팥">팥</option>
+														<option value="녹두">녹두</option>
+														<option value="기타두류">기타두류</option>
 													</select>
-													<select id="product1_3" name="product1_3" title="과일 선택" class="formstyle_rural" style="display: none;">
-														<option value="과일 선택">과일 선택</option>
+													<select id="product1_3" name="product1_3" title="과실 선택" class="formstyle_rural" style="display: none;">
+														<option value="과실 선택">과일 선택</option>
 														<option value="사과">사과</option>
-														<option value="오렌지">오렌지</option>
-														<option value="수박">수박</option>
+														<option value="배">배</option>
+														<option value="복숭아">복숭아</option>
+														<option value="포도">포도</option>
+														<option value="감귤">감귤</option>
+														<option value="감">감</option>
+														<option value="단감">단감</option>
+														<option value="떫은감">떫은감</option>
+														<option value="자두">자두</option>
+														<option value="기타">기타</option>
 													</select>
+													<select id="product1_4" name="product1_4" title="채소 선택" class="formstyle_rural" style="display: none;">
+														<option value="채소 선택">채소 선택</option>
+														<option value="수박">수박</option>
+														<option value="참외">참외</option>
+														<option value="딸기">딸기</option>
+														<option value="오이">오이</option>
+														<option value="호박">호박</option>
+														<option value="토마토">토마토</option>
+														<option value="무">무</option>
+														<option value="당근">당근</option>
+														<option value="배추">배추</option>
+														<option value="시금치">시금치</option>
+														<option value="상추">상추</option>
+														<option value="양배추">양배추</option>
+														<option value="고추">고추</option>
+														<option value="건고추">건고추</option>
+														<option value="풋고추">풋고추</option>
+														<option value="파">파</option>
+														<option value="대파">대파</option>
+														<option value="쪽파">쪽파</option>
+														<option value="양파">양파</option>
+														<option value="생강">생강</option>
+														<option value="마늘">마늘</option>
+														<option value="고구마">고구마</option>
+														<option value="감자">감자</option>
+														<option value="봄감자">봄감자</option>
+														<option value="일반봄감자">일반봄감자</option>
+														<option value="고랭지감자">고랭지감자</option>
+														<option value="가을감자">가을감자</option>
+													</select>
+													<select id="product1_5" name="product1_5" title="특용작물 선택" class="formstyle_rural" style="display: none;">
+														<option value="특용작물 선택">특용작물 선택</option>
+														<option value="유채">콩</option>
+														<option value="참깨">팥</option>
+														<option value="들깨">녹두</option>
+														<option value="땅콩">땅콩</option>
+														<option value="기타두류">기타두류</option>
+													</select>
+													
 												</form>
 											 </td>
 											 <td class="searchboxtd_rural">

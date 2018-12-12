@@ -83,23 +83,23 @@
 											 	<select id="location_rural" name="location_rural" title="생산지역" class="formstyle_rural">
 													<option value="생산지역">생산지역</option>
 													<option value="전국">전국</option>
-													<option value="서울시">서울시</option>
-													<option value="부산시">부산시</option>
-													<option value="대구시">대구시</option>
-													<option value="인천시">인천시</option>
-													<option value="광주시">광주시</option>
-													<option value="대전시">대전시</option>
-													<option value="울산시">울산시</option>
-													<option value="세종시">세종시</option>
-													<option value="경기도">경기도</option>
-													<option value="강원도">강원도</option>
-													<option value="충청북도">충청북도</option>
-													<option value="충청남도">충청남도</option>
-													<option value="전라북도">전라북도</option>
-													<option value="전라남도">전라남도</option>
-													<option value="경상북도">경상북도</option>
-													<option value="경상남도">경상남도</option>
-													<option value="제주도">제주도</option>
+													<option value="seoul">서울시</option>
+													<option value="busan">부산시</option>
+													<option value="daegu">대구시</option>
+													<option value="incheon">인천시</option>
+													<option value="gwangju">광주시</option>
+													<option value="daejeon">대전시</option>
+													<option value="ulsal">울산시</option>
+													<option value="sejong">세종시</option>
+													<option value="gyeonggi">경기도</option>
+													<option value="gangwon">강원도</option>
+													<option value="chungcheongbuk">충청북도</option>
+													<option value="chungcheongnam">충청남도</option>
+													<option value="jeollabuk">전라북도</option>
+													<option value="jeollanam">전라남도</option>
+													<option value="gyeongsangbuk">경상북도</option>
+													<option value="gyeongsangnam">경상남도</option>
+													<option value="jeju">제주도</option>
 												</select>
 											 </td>
 											 <td class="searchboxtd_rural" width="200px">											 	
@@ -212,6 +212,7 @@
 								<!-- </form> -->
 							</div>
 							<!-- 검색 조건 끝 -->
+							<span>"지역"의 "품목" 생산량</span>
 							<!-- 다음지도 API 시작 -->
 							<div class="map_wrap_rural">
 								<div id="map" style="width:100%;height:100%;"></div>
@@ -220,9 +221,11 @@
 							        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
 							    </div>
 							</div>							
-							<button onclick="panTo()" class="map_origin_rural">원위치 이동</button> 
+							
 							<!-- 다음지도 API 끝 -->
+							
 							<!-- 결과 그래프 표시 시작 -->
+							<span>"지역"의 기온변화에 따른 "품목"의 생산량 변통추이 그래프 </span>
 							<div id="search_graph_rural">
 								<div id="XAxisTimezone"></div>
 							</div>

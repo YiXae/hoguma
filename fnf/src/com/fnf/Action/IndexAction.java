@@ -11,7 +11,7 @@ public class IndexAction implements Action {
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		System.out.println("IndexAction ");
 		String url ="index.jsp";
 		
 		ActionForward forward = new ActionForward();

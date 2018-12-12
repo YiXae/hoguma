@@ -37,6 +37,7 @@
 .info .title {
     font-weight: bold;
 }
+
 </style>
 </head>
 <body>
@@ -81,8 +82,7 @@
 											 </td>
 											 <td class="searchboxtd_rural">
 											 	<select id="location_rural" name="location_rural" title="생산지역" class="formstyle_rural">
-													<option value="생산지역">생산지역</option>
-													<option value="전국">전국</option>
+													<option value="지역 선택">생산지역 선택</option>
 													<option value="seoul">서울시</option>
 													<option value="busan">부산시</option>
 													<option value="daegu">대구시</option>
@@ -112,8 +112,8 @@
 														<option value="채소">채소</option>
 														<option value="특용작물">특용작물</option>
 													</select>
-													<select id="product1_1" name="product1_1" title="곡류 선택" class="formstyle_rural" style="display: none;">
-														<option value="곡류 선택">곡류 선택</option>
+													<select id="product1_1" name="product1_1" title="곡류 선택" class="formstyle_rural select_product_name" style="display: none;">
+														<option value="품목 선택">곡류 선택</option>
 														<option value="논벼">논벼</option>
 														<option value="밭벼">밭벼</option>
 														<option value="겉보리">겉보리</option>
@@ -127,15 +127,15 @@
 														<option value="메밀">메밀</option>
 														<option value="기타잡곡">기타잡곡</option>
 													</select>
-													<select id="product1_2" name="product1_2" title="두류 선택" class="formstyle_rural" style="display: none;">
-														<option value="두류 선택">두류 선택</option>
+													<select id="product1_2" name="product1_2" title="두류 선택" class="formstyle_rural select_product_name" style="display: none;">
+														<option value="품목 선택">두류 선택</option>
 														<option value="콩">콩</option>
 														<option value="팥">팥</option>
 														<option value="녹두">녹두</option>
 														<option value="기타두류">기타두류</option>
 													</select>
-													<select id="product1_3" name="product1_3" title="과실 선택" class="formstyle_rural" style="display: none;">
-														<option value="과실 선택">과일 선택</option>
+													<select id="product1_3" name="product1_3" title="과실 선택" class="formstyle_rural select_product_name" style="display: none;">
+														<option value="품목 선택">과일 선택</option>
 														<option value="사과">사과</option>
 														<option value="배">배</option>
 														<option value="복숭아">복숭아</option>
@@ -147,8 +147,8 @@
 														<option value="자두">자두</option>
 														<option value="기타">기타</option>
 													</select>
-													<select id="product1_4" name="product1_4" title="채소 선택" class="formstyle_rural" style="display: none;">
-														<option value="채소 선택">채소 선택</option>
+													<select id="product1_4" name="product1_4" title="채소 선택" class="formstyle_rural select_product_name" style="display: none;">
+														<option value="품목 선택">채소 선택</option>
 														<option value="수박">수박</option>
 														<option value="참외">참외</option>
 														<option value="딸기">딸기</option>
@@ -177,8 +177,8 @@
 														<option value="고랭지감자">고랭지감자</option>
 														<option value="가을감자">가을감자</option>
 													</select>
-													<select id="product1_5" name="product1_5" title="특용작물 선택" class="formstyle_rural" style="display: none;">
-														<option value="특용작물 선택">특용작물 선택</option>
+													<select id="product1_5" name="product1_5" title="특용작물 선택" class="formstyle_rural select_product_name" style="display: none;">
+														<option value="품목 선택">특용작물 선택</option>
 														<option value="유채">콩</option>
 														<option value="참깨">팥</option>
 														<option value="들깨">녹두</option>
@@ -190,21 +190,21 @@
 											 <td class="searchboxtd_rural">
 											 	<select id="period_rural" name="period_rural" title="기간 선택" class="formstyle_rural">
 													<option value="기간 선택">기간 선택</option>
-													<option value="2010">2010~</option>
-													<option value="2000">2000~</option>
-													<option value="1990">1990~</option>
-													<option value="1980">1980~</option>
+													<option value="2010">2010 ~</option>
+													<option value="2000">2000 ~</option>
+													<option value="1990">1990 ~</option>
+													<option value="1980">1980 ~</option>
 												</select>
 											 </td>
 											 <td class="searchboxtd_rural" width="100px">
-											 	<button id="search_to_rural" class="search_do_btn_rural">검색 실행</button>											 	
+											 	<button id="search_to_rural" class="search_do_btn_rural">검색 실행</button>		
 											 </td>
 										</tr>
 									</table>
 								<!-- </form> -->
 							</div>
 							<!-- 검색 조건 끝 -->
-							<span>지역별 2017년 ${name} 생산량을 확인하세요</span>
+							<span>지역별 최근 1년의 ${name} 생산량을 확인하세요</span>
 							<!-- 다음지도 API 시작 -->
 							<div class="map_wrap_rural">
 								<div id="map" style="width:100%;height:100%;"></div>

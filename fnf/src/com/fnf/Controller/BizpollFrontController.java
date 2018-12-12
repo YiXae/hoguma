@@ -112,6 +112,7 @@ public class BizpollFrontController extends HttpServlet {
 			action = new PraviteAgreeMentAction(); // 객체 생성
 			forward = action.excute(request, response); // 객체 사용
 		} else if(command.equals("/rural.bizpoll")) {
+			System.out.println("이보슈");
 			action = new RuralAction(); // 객체 생성
 			forward = action.excute(request, response); // 객체 사용
 		} else if(command.equals("/fishingvillage.bizpoll")) {
@@ -204,7 +205,9 @@ public class BizpollFrontController extends HttpServlet {
 		} else if(command.equals("/mydiary_replywrite.bizpoll")) {
 			action = new MyDiaryReplyWriteAction(); // 객체 생성
 			forward = action.excute(request, response); // 객체 사용
-		} 
+		} else {
+			System.out.println("주소매칭없음");
+		}
 		
 		
 		// 공통 분기작업(페이지이동)

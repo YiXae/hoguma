@@ -49,18 +49,24 @@
 											 <td class="searchboxtd_fish">
 											 	<select id="location_fish" name="location_fish" title="생산지역" class="formstyle_fish">
 													<option value="생산지역">생산지역</option>
-													<option value="전국">전국</option>													
-													<option value="부산시">부산시</option>													
-													<option value="인천시">인천시</option>
-													<option value="울산시">울산시</option>
-													<option value="경기도">경기도</option>
-													<option value="강원도">강원도</option>													
-													<option value="충청남도">충청남도</option>
-													<option value="전라북도">전라북도</option>
-													<option value="전라남도">전라남도</option>
-													<option value="경상북도">경상북도</option>
-													<option value="경상남도">경상남도</option>
-													<option value="제주도">제주도</option>
+													<option value="전국">전국</option>
+													<option value="seoul">서울시</option>
+													<option value="busan">부산시</option>
+													<option value="daegu">대구시</option>
+													<option value="incheon">인천시</option>
+													<option value="gwangju">광주시</option>
+													<option value="daejeon">대전시</option>
+													<option value="ulsal">울산시</option>
+													<option value="sejong">세종시</option>
+													<option value="gyeonggi">경기도</option>
+													<option value="gangwon">강원도</option>
+													<option value="chungcheongbuk">충청북도</option>
+													<option value="chungcheongnam">충청남도</option>
+													<option value="jeollabuk">전라북도</option>
+													<option value="jeollanam">전라남도</option>
+													<option value="gyeongsangbuk">경상북도</option>
+													<option value="gyeongsangnam">경상남도</option>
+													<option value="jeju">제주도</option>
 												</select>
 											 </td>
 											 <td class="searchboxtd_fish" width="200px">
@@ -94,18 +100,10 @@
 											 <td class="searchboxtd_fish">
 											 	<select id="period_fish" name="period_fish" title="기간 선택" class="formstyle_fish">
 													<option value="기간 선택">기간 선택</option>
-													<option value="전체">전체</option>
-													<option value="1년">1년</option>
-													<option value="2년">2년</option>
-													<option value="3년">3년</option>
-													<option value="4년">4년</option>
-													<option value="5년">5년</option>
-													<option value="6년">6년</option>
-													<option value="7년">7년</option>
-													<option value="8년">8년</option>
-													<option value="9년">9년</option>
-													<option value="10년">10년</option>
-													<option value="20년">20년</option>
+													<option value="2010">2010~</option>
+													<option value="2000">2000~</option>
+													<option value="1990">1990~</option>
+													<option value="1980">1980~</option>
 												</select>
 											 </td>
 											 <td class="searchboxtd_fish" width="100px">

@@ -23,7 +23,7 @@ public class ProductDAO {
 		// 객체생성 1회 실시
 		private static ProductDAO instance = new ProductDAO();
 		
-		public ProductDAO getInstance() {
+		public static ProductDAO getInstance() {
 			return instance;
 		}
 		
@@ -40,10 +40,12 @@ public class ProductDAO {
 			return result;
 		}
 		
-		public List<YearTempCropDTO> selectForGraph(String startyear, String name, String region) {
+		public List<YearTempCropDTO> selectForGraph(String region, String name, String year) {
+			//										다 스트링으로 가져왔음!!!
+			// 지역, 품목, 시작년도 선택했을 때의 결과 리스트 반환 
 			List<YearTempCropDTO> result = null;
 			HashMap<String, String> map = new HashMap<>();
-			map.put("startyear", startyear);
+			map.put("startyear", year);
 			map.put("name", name);
 			map.put("region", region);
 			sqlSession = sqlSessionFactory.openSession();

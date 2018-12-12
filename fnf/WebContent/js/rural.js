@@ -1,3 +1,26 @@
+$("#search_to_rural").click(function() {
+	var region = $("#location_rural").val();
+	var name = $(".select_product_name:visible").val();
+	var year = $("#period_rural").val();
+	// alert("지역:"+region+",품목:"+name+",시작년도:"+year);
+	// 품목명 hidden일 때는 null로 가져옴
+	if(region=="지역 선택" || name==null || name=="선택" || year=="기간 선택"){
+		alert("선택이 완료되지 않았습니다.");
+	} else {
+		location.href="rural.bizpoll?region="+region_name+"&name="+name+"&year="+year;
+	}
+});
+
+$(".select_product_name").change(function() {
+	//alert("품목명 선택함");
+});
+
+
+
+
+
+
+
 /* 검색조건 오픈 시작 */
 $(function () { 
     $("#search_open_rural").click(function() {

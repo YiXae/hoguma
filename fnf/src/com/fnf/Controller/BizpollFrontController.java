@@ -86,8 +86,10 @@ public class BizpollFrontController extends HttpServlet {
 		
 		System.out.println("uri : " + uri);
 		System.out.println("ctx : " + ctx);
+		System.out.println("야!!");
 		System.out.println("페이지 이동 =====> " + command);
 		
+		System.out.println("안뇽?");
 		// Action 단 이동
 		if(command.equals("/index.bizpoll")) {
 			action = new IndexAction(); // 객체 생성

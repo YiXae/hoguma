@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="include/header.jsp"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -259,18 +261,46 @@
 <!-- 스크립트 시작 -->
 <script type="text/javascript" src="js/daummap.js"></script>
 <script type="text/javascript" src="js/rural.js"></script>
-<script>
+<script type="text/javascript">
 var arr = [["x"],["평균기온"],["총생산량"]];
+
+<c:forEach items="${listToGraph}" var="item">
+	arr[0].push("${item.year}");
+	arr[1].push("${item.temp}");
+	arr[2].push("${item.crop}");
+</c:forEach>
+
+ 
+var arr2 = [["x","1979"],
+			["평균기온", 20],
+			["총생산량", 300]];
+arr2[0].push("1980");
+arr2[0].push("1981");
+arr2[0].push("1982");
+arr2[0].push("${year}");
+arr2[1].push("18");
+arr2[1].push("17");
+arr2[1].push("15");
+arr2[1].push("${temp}")
+arr2[2].push("500");
+arr2[2].push("800");
+arr2[2].push("null");
+arr2[2].push("${crop}")
+
+alert(arr2);
+
 
 var chart = bb.generate({
 	  data: {
 	    x: "x",
 	    xFormat: "%Y",
-	    columns: [
+	    columns: arr2 
+	    	/* [
 	    	["x", "1980", "1981", "1982", "1983", "1984", "1985",  "1986", "1987", "1988", "1989", "1990", "1991",  "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"],
 			["평균기온", 11.2, 11.4, 12.4, 12.4, 11.9, 12.2, 11.6, 12.2, 11.9, 12.6, 12.9, 12, 12.2, 11.5, 12.7, 11.6, 11.6, 12.4, 13.5, 12.5, 12, 12.4, 12.5, 12.3, 12.7, 12, 12.8, 13, 12.9, 12.8, 12.6, 12.3, 12.3, 12.7, 12.9, 13.2, 13.5, 12.7],
 			["총생산량", 29185, 20913,	29981, 33816, 47891, 47879, 41332, 51935, 41190, 31064, 23458, 20672, 26218, 21131, 18342, 23555, 18406, 16845, 15016, 17982, 16953, 15430, 15842, 9873, 9100, 8122, 6176, 6822, 7358, 4910, 4559, 5930, 5978, 5235, 8785, 8010, 4979, 4124]
-		    ],
+		    ] */
+		    ,
 		    
 	    axes: {
 	        평균기온: "y2",
@@ -369,6 +399,16 @@ $.getJSON("map/map1.geojson", function(geojson) {
   var coordinates = [];    //좌표 저장할 배열
   var name = "";            //행정 구 이름
 
+  // 멀티폴리곤지역인 경우 폴리곤들 저장할 배열
+  var busan = [];
+  var incheon = [];
+  var chungcheongnam = [];
+  var jeollabuk = [];
+  var jeollanam = [];
+  var gyeongsangbuk = [];
+  var gyeongsangnam = [];
+  var jeju = [];
+  
   $.each(data, function(index, val) {
 
       coordinates = val.geometry.coordinates;
@@ -394,8 +434,7 @@ var map = new daum.maps.Map(mapContainer, mapOption),
   customOverlay = new daum.maps.CustomOverlay({}),
   infowindow = new daum.maps.InfoWindow({removable: true});
 
-
-var polygons=[];    
+  
 
 //다각형을 생상하고 이벤트를 등록하는 함수입니다
 function displayArea(coordinates, name) {
@@ -441,7 +480,41 @@ function displayArea(coordinates, name) {
    // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
    // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
    daum.maps.event.addListener(polygon, 'mouseover', function() {
-       polygon.setOptions({fillColor: '#09f'});
+	   if(name="인천광역시"){
+		   $.each(incheon, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="부산광역시"){
+		   $.each(busan, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="충청남도"){
+		   $.each(chungcheongnam, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="전라북도"){
+		   $.each(jeollabuk, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="전라남도"){
+		   $.each(jeollanam, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="경상북도"){
+		   $.each(gyeongsangbuk, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="경상남도"){
+		   $.each(gyeongsangnam, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else if(name="제주특별자치도"){
+		   $.each(jeju, function(idx, poly) {
+			   poly.setOptions({fillColor: '#09f'});
+		   }); 
+	   } else {
+       		polygon.setOptions({fillColor: '#09f'});
+	   }
 
        customOverlay.setContent('<div class="area">' + name + '</div>');
        
@@ -458,7 +531,41 @@ function displayArea(coordinates, name) {
   // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
   // 커스텀 오버레이를 지도에서 제거합니다 
   daum.maps.event.addListener(polygon, 'mouseout', function() {
-      polygon.setOptions({fillColor: '#fff'});
+	  if(name="인천광역시"){
+		   $.each(incheon, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="부산광역시"){
+		   $.each(busan, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="충청남도"){
+		   $.each(chungcheongnam, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="전라북도"){
+		   $.each(jeollabuk, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="전라남도"){
+		   $.each(jeollanam, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="경상북도"){
+		   $.each(gyeongsangbuk, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="경상남도"){
+		   $.each(gyeongsangnam, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else if(name="제주특별자치도"){
+		   $.each(jeju, function(idx, poly) {
+			   poly.setOptions({fillColor: '#fff'});
+		   }); 
+	   } else {
+     		 polygon.setOptions({fillColor: '#fff'});
+	   }
       customOverlay.setMap(null); // 지역이름 뜨는 것 사라짐
   }); 
  
@@ -466,8 +573,45 @@ function displayArea(coordinates, name) {
   daum.maps.event.addListener(polygon, 'click', function(mouseEvent) {
       var content = '<div class="info">' + 
                   '   <div class="title">' + name + '</div>' +
-                  '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></area>' +
-                  '</div>';
+                  '   <div class="size">${name} 생산량 : 약  ';
+      if(name="인천광역시"){
+    	  content = content +  '${ProductDTO.incheon}';
+	  } else if(name="부산광역시"){
+		  content = content +  '${ProductDTO.busan}';
+	  } else if(name="충청남도"){
+		  content = content +  '${ProductDTO.chungcheongnam}';
+	  } else if(name="전라북도"){
+		  content = content +  '${ProductDTO.jeollabuk}';
+	  } else if(name="전라남도"){
+		  content = content +  '${ProductDTO.jeollanam}';
+	  } else if(name="경상북도"){
+		  content = content +  '${ProductDTO.gyeongsangbuk}';
+	  } else if(name="경상남도"){
+		  content = content +  '${ProductDTO.gyeongsangnam}';
+	  } else if(name="제주특별자치도"){
+		  content = content +  '${ProductDTO.jeju}';
+	  } else if(name="서울특별시"){
+		  content = content +  '${ProductDTO.seoul}';
+	  }else if(name="경기도"){
+		  content = content +  '${ProductDTO.gyeonggi}';
+	  }else if(name="강원도"){
+		  content = content +  '${ProductDTO.gangwon}';
+	  }else if(name="충청북도"){
+		  content = content +  '${ProductDTO.chungcheongbuk}';
+	  }else if(name="세종특별자치시"){
+		  content = content +  '${ProductDTO.sejong}';
+	  }else if(name="대전광역시"){
+		  content = content +  '${ProductDTO.daejeon}';
+	  }else if(name="대구광역시"){
+		  content = content +  '${ProductDTO.daegu}';
+	  }else if(name="울산광역시"){
+		  content = content +  '${ProductDTO.ulsal}';
+	  }else if(name="광주광역시"){
+		  content = content +  '${ProductDTO.gwangju}';
+	  }
+      
+      
+      content = content + 't</div>';
 
       infowindow.setContent(content); 
       infowindow.setPosition(mouseEvent.latLng); 

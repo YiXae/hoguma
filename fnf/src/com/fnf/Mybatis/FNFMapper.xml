@@ -9,8 +9,13 @@
 	SELECT * FROM farm_total WHERE name = #{name} AND year = (SELECT MAX(year) FROM farm_total)
 </select><!-- 해당 품목의 전지역 최근 1년의 생산량 조회 -->
 
-
-
+<select id="selectForGraph" resultType="com.fnf.DTO.YearTempCropDTO">
+	<![CDATA[
+	SELECT t.year, t.#{region} temp, f.#{region} 
+	FROM temperature_year t, farm_total f
+	WHERE t.year >= #{startyear} AND f.name = #{name} AND t.year = f.year;
+	]]>
+</select><!-- 지역, 시작년도, 품목 선택했을 때의 결과 -->
 
 
 

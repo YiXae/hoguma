@@ -190,18 +190,10 @@
 											 <td class="searchboxtd_rural">
 											 	<select id="period_rural" name="period_rural" title="기간 선택" class="formstyle_rural">
 													<option value="기간 선택">기간 선택</option>
-													<option value="전체">전체</option>
-													<option value="1년">1년</option>
-													<option value="2년">2년</option>
-													<option value="3년">3년</option>
-													<option value="4년">4년</option>
-													<option value="5년">5년</option>
-													<option value="6년">6년</option>
-													<option value="7년">7년</option>
-													<option value="8년">8년</option>
-													<option value="9년">9년</option>
-													<option value="10년">10년</option>
-													<option value="20년">20년</option>
+													<option value="2010">2010~</option>
+													<option value="2000">2000~</option>
+													<option value="1990">1990~</option>
+													<option value="1980">1980~</option>
 												</select>
 											 </td>
 											 <td class="searchboxtd_rural" width="100px">
@@ -212,7 +204,7 @@
 								<!-- </form> -->
 							</div>
 							<!-- 검색 조건 끝 -->
-							<span>"지역"의 "품목" 생산량</span>
+							<span>지역별 2017년 ${name} 생산량을 확인하세요</span>
 							<!-- 다음지도 API 시작 -->
 							<div class="map_wrap_rural">
 								<div id="map" style="width:100%;height:100%;"></div>
@@ -225,7 +217,7 @@
 							<!-- 다음지도 API 끝 -->
 							
 							<!-- 결과 그래프 표시 시작 -->
-							<span>"지역"의 기온변화에 따른 "품목"의 생산량 변통추이 그래프 </span>
+							<span>${region}의 기온변화에 따른 ${name}의 생산량 변통추이 그래프 </span>
 							<div id="search_graph_rural">
 								<div id="XAxisTimezone"></div>
 							</div>
@@ -268,6 +260,8 @@
 <script type="text/javascript" src="js/daummap.js"></script>
 <script type="text/javascript" src="js/rural.js"></script>
 <script>
+var arr = [["x"],["평균기온"],["총생산량"]];
+
 var chart = bb.generate({
 	  data: {
 	    x: "x",

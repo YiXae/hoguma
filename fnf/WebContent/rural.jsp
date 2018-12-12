@@ -116,8 +116,6 @@
 														<option value="곡류 선택">곡류 선택</option>
 														<option value="논벼">논벼</option>
 														<option value="밭벼">밭벼</option>
-														<option value="논벼_볏짚">논벼_볏짚</option>
-														<option value="겉보리쌀보리">겉보리쌀보리</option>
 														<option value="겉보리">겉보리</option>
 														<option value="쌀보리">쌀보리</option>
 														<option value="맥주보리">맥주보리</option>
@@ -185,7 +183,6 @@
 														<option value="참깨">팥</option>
 														<option value="들깨">녹두</option>
 														<option value="땅콩">땅콩</option>
-														<option value="기타두류">기타두류</option>
 													</select>
 													
 												</form>

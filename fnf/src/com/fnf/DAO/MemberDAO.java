@@ -124,10 +124,10 @@ public class MemberDAO {
 	// 회원탈퇴를 위한 Password 중복체크(Ajax)
 		public String confirmPW(String mid, String mpw) {
 			String result = null;
-			sqlSession = sqlSessionFactory.openSession();
 			MemberDTO mDto = new MemberDTO();
 			mDto.setMid(mid);
 			mDto.setMpw(mpw);
+			sqlSession = sqlSessionFactory.openSession();
 			try {
 				result = sqlSession.selectOne("confirmPW", mDto);
 				if(result != null) {

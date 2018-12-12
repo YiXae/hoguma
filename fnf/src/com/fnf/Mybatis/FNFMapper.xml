@@ -4,6 +4,27 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com/fnf/Mybatis/FNFMapper.xml">
+<!-- 생산물관련부분!!!!시작!!!!!!! -->
+<select id="oneYearAll" resultType="com.fnf.DTO.MemberDTO">
+	SELECT * FROM farm_total WHERE name = #{name} AND year = (SELECT MAX(year) FROM farm_total)
+</select><!-- 해당 품목의 전지역 최근 1년의 생산량 조회 -->
+
+
+
+
+
+
+<!-- 생산물관련부분!!!!끝!!!!!!! -->
+
+
+
+
+
+
+
+
+
+
 <!-- SQL 문 여기에 작성, DAO SQL 문 안쓰고 최소화 시킴 -->
 	
 <!-- MemberDAO 내용 시작 -->

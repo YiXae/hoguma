@@ -56,7 +56,7 @@
 													<option value="incheon">인천시</option>
 													<option value="gwangju">광주시</option>
 													<option value="daejeon">대전시</option>
-													<option value="ulsal">울산시</option>
+													<option value="ulsan">울산시</option>
 													<option value="sejong">세종시</option>
 													<option value="gyeonggi">경기도</option>
 													<option value="gangwon">강원도</option>

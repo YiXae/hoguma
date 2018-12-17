@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+	.gen_content {	    
+	    margin-top: 20px;
+	    padding-left: 20px;
+	    padding-right: 20px;
+	    font-size: 12px;	   
+	    width: 922px;		
+		font-size: 12px;
+		letter-spacing: 0px;
+		color: #999999;
+		box-sizing: border-box;
+    }
+
+	.search_rural {
+		position: relative;
+	}
+	
+	.search_open_btn {
+		padding: 7px 10px;
+		outline: 0px;		
+		font-family: 'Nanum Gothic Coding', monospace;
+		color: #60768a;
+		font-size: 12px;
+		text-decoration: none;
+		text-align: center;
+		border: 1px solid #8293a9;
+		background-color: #e8effd;		
+		border-radius: 5px;
+		box-sizing: border-box;
+		display: inline-block;
+		position: absolute;
+		top: 2px;
+		right: 18px;
+		cursor: pointer; 
+	}
+
+	.search_open_btn:hover {
+		color: orange;
+	}
+	
+	#search_input {
+		margin-bottom: 10px;
+		width: 882px;
+		border: 1px solid lightgray;
+		border-radius: 5px;		
+	}
+	
+	.hide {
+		display: none;
+	}
+
+	#searchbox {
+		width: 862px;
+		margin: 10px;
+		border-collapse: collapse;
+	}
+	
+	.searchboxtitle {
+		text-align: left;
+		font-size: 14px;
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-weight: bold;
+		padding: 10px;
+		color: #60768a;
+		box-sizing: border-box;
+		border: 1px solid #8293a9;
+		background-color: #e8effd;		
+	}
+	
+	.searchboxtd {
+		text-align: left;
+		font-size: 12px;
+		font-family: 'Nanum Gothic Coding', monospace;
+		padding: 10px;
+		box-sizing: border-box;
+		border: 1px solid #8293a9;
+		vertical-align: top;		
+	}
+	
+	.searchboxtd > label {
+  		margin-left: -5px;
+	}
+	
+	.formstyle {
+		font-size: 12px;
+		outline: 0px;
+		font-family: 'Nanum Gothic Coding', monospace;
+		background-color: #e8fdeb;
+		width: 190px;
+		height: 27px;
+		line-height: 27px;
+		margin-bottom: 10px;
+		border-radius: 5px;
+		display: inline-block;		
+	}
+	
+	input[type="radio"] {
+  		margin-top: -1px;
+  		vertical-align: middle;
+	}
+
+	.search_do_btn {
+		padding: 7px 11px;	
+		outline: 0px;	
+		font-family: 'Nanum Gothic Coding', monospace;
+		color: #2a5493;
+		font-size: 12px;
+		text-decoration: none;
+		text-align: center;
+		border: 1px solid lightgray;
+		background-color: #eeeeee;		
+		border-radius: 5px;
+		box-sizing: border-box;
+		display: inline-block;
+		cursor: pointer; 
+	}
+
+	.search_do_btn:hover {
+		color: orange;
+	}
+	
+	#search_graph {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding: 10px;
+		width: 882px;
+		border: 1px solid lightgray;
+		border-radius: 5px;
+		box-sizing: border-box;	
+		/* display: none; */	
+	}
+	
+	#search_graph_text {
+		margin-bottom: 10px;
+		font-size: 13px;
+		padding: 10px;
+		width: 882px;
+		border: 1px solid lightgray;
+		border-radius: 5px;	
+		box-sizing: border-box;
+		/* display: none; */		
+	}
+
+/* ▒▒ 다음지도 수산물 생산정보 CSS ▒▒ */
+
+	.map_wrap {
+ 		position: relative;
+ 		overflow: hidden;
+ 		width: 882px;
+ 		height: 600px;
+ 		margin-bottom: 10px;
+ 		border: 1px solid lightgray;
+ 		background-color: #999999;
+ 	}
+ 
+	.radius_border {
+		border: 1px solid #919191;
+		border-radius: 5px;
+	}     
+	
+	.custom_typecontrol {
+		position: absolute;
+		top: 10px;
+		right: 35px;
+		overflow: hidden;
+		width: 130px;
+		height: 30px;
+		margin: 0px;
+		padding: 0px;
+		z-index: 1;
+		font-size: 12px;
+		font-family: 'Nanum Gothic Coding', monospace;
+	}
+
+	.custom_typecontrol span {
+		display: block;
+		width: 65px;
+		height: 30px;
+		float: left;
+		text-align: center;
+		line-height: 30px;
+		cursor: pointer;
+	}
+	
+	.custom_typecontrol .btn {
+		background: #fff;
+		background: linear-gradient(#fff,  #e6e6e6);
+	}    
+	   
+	.custom_typecontrol .btn:hover {
+		background:#f5f5f5;
+		background:linear-gradient(#f5f5f5,#e3e3e3);
+	}
+	
+	.custom_typecontrol .btn:active {
+		background: #e6e6e6;
+		background: linear-gradient(#e6e6e6, #fff);
+	}    
+	
+	.custom_typecontrol .selected_btn {
+		color: #fff;
+		background: #425470;
+		background: linear-gradient(#425470, #5b6d8a);
+	}
+	
+	.custom_typecontrol .selected_btn:hover {
+		color: #fff;
+	}   
+
+	.map_origin {
+		padding: 7px 11px;
+		outline: 0px;		
+		font-family: 'Nanum Gothic Coding', monospace;
+		color: #2a5493;
+		font-size: 12px;
+		text-decoration: none;
+		text-align: center;
+		border: 1px solid lightgray;
+		background-color: #eeeeee;		
+		border-radius: 5px;
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+	
+	.map_origin:hover {
+		color: orange;		
+	}
+

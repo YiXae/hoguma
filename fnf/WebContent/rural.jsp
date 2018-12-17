@@ -91,7 +91,7 @@
 													<option value="incheon">인천시</option>
 													<option value="gwangju">광주시</option>
 													<option value="daejeon">대전시</option>
-													<option value="ulsal">울산시</option>
+													<option value="ulsan">울산시</option>
 													<option value="sejong">세종시</option>
 													<option value="gyeonggi">경기도</option>
 													<option value="gangwon">강원도</option>
@@ -287,14 +287,14 @@ arr2[2].push("800");
 arr2[2].push("null");
 arr2[2].push("${crop}")
 
-alert(arr2);
+alert(arr);
 
 
 var chart = bb.generate({
 	  data: {
 	    x: "x",
 	    xFormat: "%Y",
-	    columns: arr2 
+	    columns: arr
 	    	/* [
 	    	["x", "1980", "1981", "1982", "1983", "1984", "1985",  "1986", "1987", "1988", "1989", "1990", "1991",  "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"],
 			["평균기온", 11.2, 11.4, 12.4, 12.4, 11.9, 12.2, 11.6, 12.2, 11.9, 12.6, 12.9, 12, 12.2, 11.5, 12.7, 11.6, 11.6, 12.4, 13.5, 12.5, 12, 12.4, 12.5, 12.3, 12.7, 12, 12.8, 13, 12.9, 12.8, 12.6, 12.3, 12.3, 12.7, 12.9, 13.2, 13.5, 12.7],
@@ -605,7 +605,7 @@ function displayArea(coordinates, name) {
 	  }else if(name="대구광역시"){
 		  content = content +  '${ProductDTO.daegu}';
 	  }else if(name="울산광역시"){
-		  content = content +  '${ProductDTO.ulsal}';
+		  content = content +  '${ProductDTO.ulsan}';
 	  }else if(name="광주광역시"){
 		  content = content +  '${ProductDTO.gwangju}';
 	  }

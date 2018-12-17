@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- DB접속정보 값을 가지고 있는 파일 설정 -->
+	<properties resource="com/fnf/Mybatis/DB.Properties"/><!-- 경로의 패키지명까지 풀네임으로 적을 것 -->
+	
+	<!-- 별명 부여 -->
+<!--<typeAliases>
+		<typeAlias type="" alias=""/>
+	</typeAliases> -->
+	
+	<!-- DB 접속정보 세팅 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+				<!-- connection pool 핵심 내용 추가 내용-->
+				<property name="poolMaximumActiveConnections" value="20"/> <!-- 활성화된 최대 connection 수 -->
+				<property name="poolMaximumIdleConnections" value="20"/> <!-- 유휴상태에서 최대 connection 수 -->
+				<property name="poolMaximumCheckoutTime" value="20000"/> <!-- 최대 connection 획득 시간 -->
+				<property name="poolTimeToWait" value="15000"/> <!-- pool이 비정상적으로 긴 경우 connection을 다시 얻으려는 시도하는 세팅 -->
+				<!-- 사용자가 들어왔을 때 최대 20개까지 connection을 미리 만들어둠,
+				       일 안하고 있을 때 미리 20개까지 connection을 미리 만들어둠,
+				     20초 간 활동이 없으면 connection에서 나가라는 의미,
+				     15초 동안 connection을 얻으로고 기다리고 있다가 connection 안 되면 다시 요청 -->
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- Mapper.xml 파일 설정 -->
+	<mappers>
+		<mapper resource="com/fnf/Mybatis/FNFMapper.xml"/>
+	</mappers>
+	
+	<!--  -->
+	
+	
+	
+	
+	
+	
+	
+</configuration>    

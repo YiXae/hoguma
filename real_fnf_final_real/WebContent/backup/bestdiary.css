@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+	.layer-open {
+		overflow:hidden;
+	}
+	
+	/* 인기 생산일지 Top 20 Tab 메뉴*/
+	#contentstab_best_wrap {
+		width: 196px;
+		height: 35px;
+		box-sizing: border-box;
+		position: absolute;
+		top: 15px;
+		right: 34px;
+	}
+	
+	/* 인기 생산일지 Top 20 Tab 메뉴*/
+	.contentstab_best {		
+		width: 92px;		
+		height: 35px;
+		text-align: center;
+		color: #3e5dad;
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-size: 14px;
+		font-weight: bold;
+		padding-top: 13px;	
+		background-image: url("../img/contents_tab_off.png");
+		background-repeat: no-repeat;
+		float: left;
+		cursor: pointer;
+	}
+	
+	/* 인기 생산일지 Top 20 Tab 메뉴*/
+	.contentstab_best.active {
+		background-image: url("../img/contents_tab_on.png");
+		background-repeat: no-repeat;
+	}
+	
+	/* 인기 생산일지 Top 20 Tab 메뉴*/
+	.contentstab_best_2 {		
+		width: 12px;		
+		height: 35px;		
+		float: left;
+	}
+	
+	/* 인기 생산일지 Top 20 Tab 메뉴*/
+	.tab_content_best {	    
+	    margin-top: 20px;
+	    padding-left: 20px;
+	    padding-right: 20px;
+	    font-size: 12px;	   
+	    width: 922px;		
+		font-size: 12px;
+		letter-spacing: 0px;
+		color: #999999;
+		box-sizing: border-box;
+	    display: none;
+    }

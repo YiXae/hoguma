@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+    /* 귀농/귀어 정보 Tab 메뉴*/
+	#contentstab_gotown_wrap {
+		width: 196px;
+		height: 35px;
+		box-sizing: border-box;
+		position: absolute;
+		top: 15px;
+		right: 34px;
+	}
+	
+	/* 귀농/귀어 정보 Tab 메뉴*/
+	.contentstab_gotown {		
+		width: 92px;		
+		height: 35px;
+		text-align: center;
+		color: #3e5dad;
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-size: 14px;
+		font-weight: bold;
+		padding-top: 13px;	
+		background-image: url("../img/contents_tab_off.png");
+		background-repeat: no-repeat;
+		float: left;
+		cursor: pointer;
+	}
+	
+	/* 귀농/귀어 정보 Tab 메뉴*/
+	.contentstab_gotown.active {
+		background-image: url("../img/contents_tab_on.png");
+		background-repeat: no-repeat;
+	}
+	
+	/* 귀농/귀어 정보 Tab 메뉴*/
+	.contentstab_gotown_2 {		
+		width: 12px;		
+		height: 35px;		
+		float: left;
+	}
+	
+	/* 귀농/귀어 정보 Tab 메뉴*/
+	.tab_content_gotown {	    
+	    margin-top: 20px;
+	    padding-left: 20px;
+	    padding-right: 20px;
+	    font-size: 12px;	   
+	    width: 922px;		
+		font-size: 12px;
+		letter-spacing: 0px;
+		color: #999999;
+		box-sizing: border-box;
+	    display: none;
+    } 

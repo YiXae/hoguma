@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+	.layer-open {
+		overflow:hidden;
+	}
+	
+/* ▒▒ 화면 레이아웃 Main 본문 ▒▒ */
+	
+	#tab_menu {
+		position: absolute;
+		top: -32px;
+		right: 20px
+	}
+	
+	#tab_menu_td {
+		cursor: pointer;
+		width: 75px;
+		height: 32px;
+		text-align: center;
+		color: #3e5dad;
+		font-size: 12px;
+		background-image: url("../img/main_tab_2.png");
+		background-repeat: no-repeat;
+	}
+
+	#tab_menu td.active {
+	    background-image: url("../img/main_tab_1.png");
+		background-repeat: no-repeat;
+	}
+	
+	/* 메인 탭 메뉴 */
+	.tab_content {
+	    padding: 5px;
+	    font-size: 12px;
+	    display: none;
+    }
+    
+    /* 인기 생산일지 Top 20 탭 메뉴 */
+    .tab_content_best {
+	    padding: 5px;
+	    font-size: 12px;
+	    display: none;
+    }
+	
+	#more_button {
+		position: absolute;
+		top: 11px;
+		right: 15px;
+	}
+
+	#more_button > a {
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-size: 11px;
+		letter-spacing: -1px;
+		color: #cb5f46;
+	}
+	
+	#more_button > a:hover {
+		color: #478938;
+	}
+	
+	#zone_area_contents1 {
+		margin-right: 20px;
+		padding: 0px 0px 0px 15px;
+		float: left;
+		width: 465px;
+		box-sizing: border-box;	
+	}
+
+	#zone_area_contents2 {
+		padding: 0px 0px 0px 15px;
+		float: left;
+		width: 465px;
+		box-sizing: border-box;	
+	}
+	
+	.il_rep {
+		margin-right: 15px;
+		float: left;
+		width: 135px;
+		box-sizing: border-box;	
+	}
+	
+/* ▒▒ 화면 레이아웃 Main의 테이블 ▒▒ */
+	
+	.contents {
+		width: 445px;
+		box-sizing: border-box;	
+	}	
+	
+	#contents_title {
+		width: 922px;
+		height: 40px;
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-size: 16px;
+		font-weight: bold;
+		letter-spacing: 0px;
+		color: #999999;
+		line-height: 40px;
+		border-bottom: 4px dotted #d2d2d2;
+		box-sizing: border-box;
+		position: relative;
+	}
+	
+	.contents_title1 {
+		width: 445px;
+		font-size: 14px;
+		font-weight: 600;
+		color: #746875;
+		box-sizing: border-box;	
+	}
+
+	.ip_rep_table {
+		width: 135px;
+		table-layout: fixed;
+		box-sizing: border-box;	
+	}
+	
+	.table_space {
+		height: 10px;
+		box-sizing: border-box;	
+	}
+		
+	.img_cell {
+		width: 135px;
+		height: 90px;
+		font-size: 0px;
+		box-sizing: border-box;
+	}
+	
+	.uploadimg_rad {
+		border-radius: 5px;		
+	}
+	
+	.img_cell > a:hover {
+		opacity: 0.6;
+	}
+
+	.ilji_contents_info {
+		width: 135px;
+		height: 30px;
+		line-height: 15px; 		
+		letter-spacing: -1px;		
+		word-break: break-all;		
+		text-align: left; 
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-wrap: break-word; 
+		display: -webkit-box; 
+		-webkit-line-clamp: 2; 
+		-webkit-box-orient: vertical;
+		box-sizing: border-box;			
+	}
+
+	.ilji_contents_info > a {
+		color: #3e5dad;
+	}
+	
+	.ilji_contents_info > a:hover {
+		color: orange;
+	}
+	
+	.ilji_contents_writer {
+		width: 135px;
+		word-break: break-all;
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-size: 11px;
+		color: #ababab;
+		box-sizing: border-box;	
+	}
+
+	#chat_title {
+		width: 950px;
+		/* font-family: 'Nanum Gothic Coding', monospace; */
+		font-size: 16px;
+		font-weight: 550;
+		height: 16px;
+		line-height: 16px;
+		/* letter-spacing: -1px; */
+		color: #229222;
+		box-sizing: border-box;	
+	}
+	
+	#chat_title > span {
+		font-family: 'Nanum Gothic Coding', monospace;
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: -1px;
+		height: 16px;
+		line-height: 16px;
+		color: #229222;
+	}

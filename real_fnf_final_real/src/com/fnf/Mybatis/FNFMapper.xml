@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com/fnf/Mybatis/FNFMapper.xml">
+<!-- SQL 문 여기에 작성, DAO SQL 문 안쓰고 최소화 시킴 -->
+	
+<!-- MemberDAO 내용 시작 -->
+		
+	<!-- 회원정보 조회 시작 -->
+	<select id="memberInfo" parameterType="String" resultType="String"> <!-- resultType은 select만 작성 -->
+		SELECT * FROM fnfmembertable
+		WHERE mnick = #{mnick}		
+	</select> 
+	<!-- 회원정보 조회 끝 -->	
+	
+	<!-- 회원 이미지 조회 시작 -->
+	<select id="memberPhoto" parameterType="String" resultType="String"> <!-- resultType은 select만 작성 -->
+		SELECT mphoto FROM fnfmembertable
+		WHERE mnick = #{mnick}		
+	</select> 
+	<!-- 회원 이미지 조회 끝 -->	
+	
+	<!-- 회원정보 myintro 조회 시작 -->
+	<select id="myIntroInfo" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO"> <!-- resultType은 select만 작성 -->
+		SELECT * FROM fnfmembertable
+		WHERE mnick = #{mnick}		
+	</select> 
+	<!-- 회원정보 myintro 조회 끝 -->
+	
+	<!-- 회원가입 페이지 ID 중복체크(Ajax) 시작 -->
+	<select id="confirmID" parameterType="String" resultType="String"> <!-- resultType은 select만 작성 -->
+		SELECT mid FROM fnfmembertable
+		WHERE mid = #{mid}
+	</select>
+	<!-- 회원가입 페이지 ID 중복체크(Ajax) 끝 -->
+	
+	<!-- 회원가입 페이지 별명 중복체크(Ajax) 시작 -->
+	<select id="confirmNick" parameterType="String" resultType="String"> <!-- resultType은 select만 작성 -->
+		SELECT mid FROM fnfmembertable
+		WHERE mnick = #{mnick}
+	</select>
+	<!-- 회원가입 페이지 별명 중복체크(Ajax) 끝 -->
+	
+	<!-- 회원등록 내용 시작 -->
+	<insert id="inputMember" parameterType="com.fnf.DTO.MemberDTO">
+		INSERT INTO fnfmembertable (mno, mid, mnick, mpw, mname, mbirth, mgender, mphone, mzipcode, maddr, maddrdetail, myakyn, mpraviteyn, mlocyn, mmailingyn)
+		VALUES(seq_fnfmembertable.NEXTVAL, #{mid}, #{mnick}, #{mpw}, #{mname}, #{mbirth}, #{mgender}, #{mphone}, #{mzipcode}, #{maddr}, #{maddrdetail}, #{myakyn}, #{mpraviteyn}, #{mlocyn}, #{mmailingyn})
+	</insert>
+	<!-- 회원등록 내용 끝 -->	
+	
+	<!-- 추가 회원등록 내용 시작 -->
+	<update id="inputMembermore" parameterType="com.fnf.DTO.MemberDTO">
+		UPDATE fnfmembertable SET
+		mphoto = #{mphoto}, 
+		midopen = #{midopen}, 
+		mphoneopen = #{mphoneopen}, 
+		mjob = #{mjob}, 
+		mintro = #{mintro},
+		mfilesize = #{mfilesize}		
+		WHERE mnick = #{mnick}
+	</update>
+	<!-- 추가 회원등록 내용 끝 -->	
+
+	<!-- 회원여부 확인 시작 -->
+	<select id="loginCheck" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO"> <!-- 로그인 성공여부는 resultType은 DTO -->
+		SELECT * FROM fnfmembertable
+		WHERE mid = #{mid} AND mpw = #{mpw}
+	</select>
+	<!-- 회원여부 확인 끝 -->
+	
+	<!-- 회원정보 수정 내용 시작 -->
+	<update id="updateMember" parameterType="com.fnf.DTO.MemberDTO">
+		UPDATE fnfmembertable SET
+		mnick = #{mnick},
+		mpw	= #{mpw},			
+		mphone = #{mphone},
+		mzipcode = #{mzipcode},
+		maddr = #{maddr},
+		maddrdetail = #{maddrdetail}
+		WHERE mid = #{mid}		
+	</update>
+	<!-- 회원정보 수정 내용 끝 -->
+	
+	<!-- 회원탈퇴를 위한 Password 중복체크(Ajax) 시작 -->
+	<select id="confirmPW" parameterType="com.fnf.DTO.MemberDTO" resultType="String">
+		SELECT mid FROM fnfmembertable
+		WHERE mid = #{mid} AND mpw = #{mpw}
+	</select>
+	<!-- 회원탈퇴를 위한 Password 중복체크(Ajax) 끝 -->	
+	
+	<!-- 회원탈퇴 시작 -->
+	<update id="delID" parameterType="String">
+		DELETE FROM fnfmembertable
+		WHERE mid = #{mid}	
+	</update>
+	<!-- 회원탈퇴 끝 -->
+	
+	<!-- 아아디 찾기를 위한 회원여부 확인 시작 -->
+	<select id="idSearch" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO">
+		SELECT mid FROM fnfmembertable
+		WHERE mname = #{mname} AND mphone = #{mphone}
+	</select>
+	<!-- 아아디 찾기를 위한 회원여부 확인 끝 -->
+	
+	<!-- 비밀번호 찾기를 위한 회원여부 확인 시작 -->
+	<select id="pwSearch" parameterType="com.fnf.DTO.MemberDTO" resultType="com.fnf.DTO.MemberDTO">
+		SELECT mpw FROM fnfmembertable
+		WHERE mid = #{mid} AND mphone = #{mphone}
+	</select>
+	<!-- 아아디 찾기를 위한 회원여부 확인 끝 -->
+		
+<!-- MemberDAO 내용 끝 -->	
+
+<!-- BoardDAO 내용 시작 -->
+
+	<!-- my 농수산물 게시판 리스트 생성 시작 -->	
+	<select id="boardListMy" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[
+			SELECT * FROM (SELECT rownum rnum,
+			    a.* 
+			    FROM (SELECT *
+			            FROM fafiboardtable
+			            WHERE bno > 0 ]]> 
+            
+			<if test='bwriter == mnick'>
+	           <![CDATA[AND bwriter = #{bwriter}]]>
+	        </if> 
+		    
+	        <if test='bkind == "all"'>
+		       <![CDATA[AND bwriter = #{bwriter}]]>
+		    </if> 
+		        
+		    <if test='bkind == "생산일지" or bkind == "일반글"'>
+		     	<![CDATA[AND bkind = #{bkind}]]>
+		    </if>
+		    
+		    <if test='bopen == "all"'>
+		       <![CDATA[AND bwriter = #{bwriter}]]>
+		    </if>
+		    
+		    <if test='bopen == "공개" or bopen == "비공개"'>
+		     	<![CDATA[AND bopen = #{bopen}]]>
+		    </if>
+		     
+		    <if test='bregdate == "all"'>
+		       	<![CDATA[AND bwriter = #{bwriter}]]>
+		    </if>
+		        
+		    <if test='bregdate == "18" or bregdate == "19" or bregdate == "20"'>
+		      	<![CDATA[AND bregdate LIKE #{bregdate}||'%']]>            	 
+		    </if>     		
+            
+            <if test='flag == "2"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "3"'>
+            	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "1"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "4"'>
+            	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+            </if> 
+            
+            <if test='code == "new"'>
+            	ORDER BY bno DESC
+            </if>
+
+            <if test='code == "good"'>
+            	ORDER BY bgoodcnt DESC, bno DESC
+            </if>
+
+            <if test='code == "reply"'>
+            	ORDER BY breplycnt DESC, bno DESC
+            </if>
+
+            <if test='code == "cnt"'>
+            	ORDER BY bviewcnt DESC, bno DESC
+            </if> 
+            
+	<![CDATA[ 
+			    ) a			
+			)			
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}	
+		]]>
+	</select> 
+	<!-- my 농수산물 게시판 리스트 생성 끝 -->
+	
+	<!-- my게시판 리스트 페이징 생성 시작 -->	
+	<select id="countPagingMy" resultType="int">
+        <![CDATA[
+		SELECT count(bno)
+		FROM fafiboardtable
+		WHERE bno > 0 ]]>
+		
+		<if test='bwriter == mnick'>
+           <![CDATA[AND bwriter = #{bwriter}]]>
+        </if> 
+        
+        <if test='bkind == "all"'>
+	       <![CDATA[AND bwriter = #{bwriter}]]>
+	    </if> 
+	        
+	    <if test='bkind == "생산일지" or bkind == "일반글"'>
+	     	<![CDATA[AND bkind = #{bkind}]]>
+	    </if>
+	    
+	    <if test='bopen == "all"'>
+	       <![CDATA[AND bwriter = #{bwriter}]]>
+	    </if>
+	    
+	    <if test='bopen == "공개" or bopen == "비공개"'>
+	     	<![CDATA[AND bopen = #{bopen}]]>
+	    </if>
+	    
+	    <if test='bregdate == "all"'>
+	       	<![CDATA[AND bwriter = #{bwriter}]]>
+	    </if>
+	        
+	    <if test='bregdate == "18" or bregdate == "19" or bregdate == "20"'>
+	      	<![CDATA[AND bregdate LIKE #{bregdate}||'%']]>            	 
+	    </if>     		
+            
+		<if test='flag =="2"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="3"'>
+        	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="1"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="4"'>
+        	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+        </if> 
+            
+	</select>	
+	<!-- my 게시판 리스트 페이징 생성 끝 -->
+	
+	<!-- 농산물 게시판 리스트 생성 시작 -->	
+	<select id="boardListRural" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[
+			SELECT * FROM (SELECT rownum rnum,
+			    a.* 
+			    FROM (SELECT *
+			            FROM fafiboardtable
+			            WHERE bno > 0 ]]> 
+            
+			<if test='bitem =="농산물" and bopen == "공개"'>
+	            <![CDATA[AND bitem = #{bitem} AND bopen = #{bopen}]]>
+	        </if>
+	        
+	        <if test='bkind == "all"'>
+		       <![CDATA[AND bitem = #{bitem}]]>
+		    </if>
+		        
+		    <if test='bkind == "생산일지" or bkind == "일반글"'>
+		     	<![CDATA[AND bkind = #{bkind}]]>
+		    </if>
+		     
+		    <if test='bregdate == "all"'>
+		       	<![CDATA[AND bitem = #{bitem}]]>
+		    </if>
+		        
+		    <if test='bregdate == "18" or bregdate == "19" or bregdate == "20"'>
+		      	<![CDATA[AND bregdate LIKE #{bregdate}||'%']]>            	 
+		    </if>
+            
+            <if test='flag == "2"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "3"'>
+            	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "1"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "4"'>
+            	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+            </if>  
+            
+            <if test='code == "new"'>
+            	ORDER BY bno DESC
+            </if>
+
+            <if test='code == "good"'>
+            	ORDER BY bgoodcnt DESC, bno DESC
+            </if>
+
+            <if test='code == "reply"'>
+            	ORDER BY breplycnt DESC, bno DESC
+            </if>
+
+            <if test='code == "cnt"'>
+            	ORDER BY bviewcnt DESC, bno DESC
+            </if> 
+            
+	<![CDATA[ 
+			    ) a			
+			)			
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}	
+		]]>
+	</select> 
+	<!-- 농산물 게시판 리스트 생성 끝 -->
+
+	<!-- 농산물 게시판 리스트 페이징 생성 시작 -->	
+	<select id="countPagingRural" resultType="int">
+        <![CDATA[
+		SELECT count(bno)
+		FROM fafiboardtable
+		WHERE bno > 0 ]]>		
+				
+		<if test='bitem =="농산물" and bopen == "공개"'>
+            <![CDATA[AND bitem = #{bitem} AND bopen = #{bopen}]]>
+        </if>
+        
+        <if test='bkind == "all"'>
+	       <![CDATA[AND bitem = #{bitem}]]>
+	    </if>
+	        
+	    <if test='bkind == "생산일지" or bkind == "일반글"'>
+	     	<![CDATA[AND bkind = #{bkind}]]>
+	    </if>
+	     
+	    <if test='bregdate == "all"'>
+	       	<![CDATA[AND bitem = #{bitem}]]>
+	    </if>
+	        
+	    <if test='bregdate == "18" or bregdate == "19" or bregdate == "20"'>
+	      	<![CDATA[AND bregdate LIKE #{bregdate}||'%']]>            	 
+	    </if>
+            
+		<if test='flag =="2"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="3"'>
+        	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="1"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="4"'>
+        	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+        </if> 
+         
+	</select>	
+	<!-- 농산물 게시판 리스트 페이징 생성 끝 -->
+	
+	<!-- 수산물 게시판 리스트 생성 시작 -->	
+	<select id="boardListFish" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[
+			SELECT * FROM (SELECT rownum rnum,
+			    a.* 
+			    FROM (SELECT *
+			            FROM fafiboardtable
+			            WHERE bno > 0 ]]> 
+            
+			<if test='bitem =="수산물" and bopen == "공개"'>
+	            <![CDATA[AND bitem = #{bitem} AND bopen = #{bopen}]]>
+	        </if>
+	        	        
+	        <if test='bkind == "all"'>
+		       <![CDATA[AND bitem = #{bitem}]]>
+		    </if>
+		        
+		    <if test='bkind == "생산일지" or bkind == "일반글"'>
+		     	<![CDATA[AND bkind = #{bkind}]]>
+		    </if>
+		     
+		    <if test='bregdate == "all"'>
+		       	<![CDATA[AND bitem = #{bitem}]]>
+		    </if>
+		        
+		    <if test='bregdate == "18" or bregdate == "19" or bregdate == "20"'>
+		      	<![CDATA[AND bregdate LIKE #{bregdate}||'%']]>            	 
+		    </if>
+            
+            <if test='flag == "2"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "3"'>
+            	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "1"'>
+            	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+            </if>
+            
+            <if test='flag == "4"'>
+            	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+            </if>  
+            
+            <if test='code == "new"'>
+            	ORDER BY bno DESC
+            </if>
+
+            <if test='code == "good"'>
+            	ORDER BY bgoodcnt DESC, bno DESC
+            </if>
+
+            <if test='code == "reply"'>
+            	ORDER BY breplycnt DESC, bno DESC
+            </if>
+
+            <if test='code == "cnt"'>
+            	ORDER BY bviewcnt DESC, bno DESC
+            </if> 
+            
+	<![CDATA[ 
+			    ) a			
+			)			
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}	
+		]]>
+	</select> 
+	<!-- 수산물 게시판 리스트 생성 끝 -->
+
+	<!-- 수산물 게시판 리스트 페이징 생성 시작 -->	
+	<select id="countPagingFish" resultType="int">
+        <![CDATA[
+		SELECT count(bno)
+		FROM fafiboardtable
+		WHERE bno > 0 ]]>		
+				
+		<if test='bitem =="수산물" and bopen == "공개"'>
+            <![CDATA[AND bitem = #{bitem} AND bopen = #{bopen}]]>
+        </if>
+        
+        <if test='bkind == "all"'>
+	       <![CDATA[AND bitem = #{bitem}]]>
+	    </if>
+	        
+	    <if test='bkind == "생산일지" or bkind == "일반글"'>
+	     	<![CDATA[AND bkind = #{bkind}]]>
+	    </if>
+	     
+	    <if test='bregdate == "all"'>
+	       	<![CDATA[AND bitem = #{bitem}]]>
+	    </if>
+	        
+	    <if test='bregdate == "18" or bregdate == "19" or bregdate == "20"'>
+	      	<![CDATA[AND bregdate LIKE #{bregdate}||'%']]>            	 
+	    </if>
+	    
+		<if test='flag =="2"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="3"'>
+        	<![CDATA[AND bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="1"'>
+        	<![CDATA[AND btitle LIKE '%'||#{keyword}||'%' OR bcontent LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+        <if test='flag =="4"'>
+        	<![CDATA[AND bwriter LIKE '%'||#{keyword}||'%']]>
+        </if>
+        
+	</select>	
+	<!-- 수산물 게시판 리스트 페이징 생성 끝 -->
+	
+	<!-- 농수산물 베스트 게시판 리스트 생성 시작 -->	
+	<select id="boardListBest" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[	
+			SELECT * FROM
+			(SELECT * FROM fafiboardtable 
+			ORDER BY  bviewcnt DESC)			
+			WHERE rownum <= 20 ]]>			
+            
+			<if test='bitem =="농산물"'>
+            	<![CDATA[AND bitem = #{bitem}]]>
+            </if> 
+	        
+	        <if test='bitem =="수산물"'>
+            	<![CDATA[AND bitem = #{bitem}]]>
+            </if> 
+	</select> 
+	<!-- 농수산물 베스트 게시판 리스트 생성 끝 -->
+	
+	<!-- 메인 농산물 베스트 게시판 리스트 생성 시작 -->	
+	<select id="bestRuralList" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[	
+			SELECT * FROM
+			(SELECT * FROM fafiboardtable 
+			ORDER BY  bviewcnt DESC)
+			WHERE bitem='농산물' AND bopen='공개' AND rownum <= 3
+		]]>
+	</select> 
+	<!-- 메인 농산물 베스트 게시판 리스트 생성 끝 -->
+	
+	<!-- 메인 수산물 베스트 게시판 리스트 생성 시작 -->	
+	<select id="bestFishList" resultType="com.fnf.DTO.BoardDTO">
+		<![CDATA[	
+			SELECT * FROM
+			(SELECT * FROM fafiboardtable 
+			ORDER BY  bviewcnt DESC)
+			WHERE bitem='수산물' AND bopen='공개' AND rownum <= 3
+		]]> 
+	</select> 
+	<!-- 메인 수산물 베스트 게시판 리스트 생성 끝 -->
+	
+	<!-- 게시판 상세 페이지 시작 -->
+	<select id="boardDetailView" resultType="com.fnf.DTO.BoardDTO">
+    	SELECT * 
+        FROM fafiboardtable
+        WHERE bno = #{bno}   
+	</select>
+	<!-- 게시판 상세 페이지 끝 -->
+	
+	<!-- 게시판 조회수 올리기 시작 -->
+	<update id="viewCnt">
+    	UPDATE fafiboardtable
+    	SET bviewcnt = bviewcnt + 1
+        WHERE bno = #{bno}   
+	</update>
+	<!-- 게시판 조회수 올리기 끝 -->
+	
+	<!-- 게시판 작성 시작 -->
+	<insert id="boardInsert" parameterType="com.fnf.DTO.BoardDTO">			
+		INSERT INTO fafiboardtable(bno, btitle, bwriter, bopen, bitem, bitema, bkind, bpplace, bmainproduct, bproduct, btotalproduct, bpbirth, bprice, bsplace, bcontent, bfilename, bfilesize)
+		VALUES(seq_fafiboardtable.NEXTVAL, #{btitle}, #{bwriter}, #{bopen}, #{bitem}, #{bitema}, #{bkind}, #{bpplace}, #{bmainproduct}, #{bproduct}, #{btotalproduct}, #{bpbirth}, #{bprice}, #{bsplace}, #{bcontent}, #{bfilename}, #{bfilesize})
+	</insert>
+	<!-- 게시판 작성 끝 -->
+		
+	<!-- 게시판 수정 시작 -->
+	<insert id="boardUpdate" parameterType="com.fnf.DTO.BoardDTO">		
+		<choose>
+			<when test="bcontent !=null">
+				UPDATE fafiboardtable SET
+					btitle = #{btitle},
+					bwriter = #{bwriter},
+					bopen = #{bopen},
+					bitem = #{bitem},
+					bitema = #{bitema},
+					bkind = #{bkind},
+					bpplace = #{bpplace},
+					bmainproduct = #{bmainproduct},
+					bproduct = #{bproduct},
+					btotalproduct = #{btotalproduct},
+					bpbirth = #{bpbirth},
+					bprice = #{bprice},					
+					bsplace = #{bsplace},
+					bcontent = #{bcontent},
+					<if test="bfilename !='no'">
+						bfilename = #{bfilename},
+						bfilesize = #{bfilesize}
+					</if>
+				WHERE bno = #{bno}				
+			</when>
+			<otherwise>
+				UPDATE fafiboardtable SET
+					btitle = #{btitle},
+					bwriter = #{bwriter},
+					bopen = #{bopen},
+					bitem = #{bitem},
+					bitema = #{bitema},
+					bkind = #{bkind},
+					bpplace = #{bpplace},
+					bmainproduct = #{bmainproduct},
+					bproduct = #{bproduct},
+					btotalproduct = #{btotalproduct},
+					bpbirth = #{bpbirth},
+					bprice = #{bprice},
+					bsplace = #{bsplace},				
+					<if test="filename !='no'">
+						bfilename = #{bfilename},
+						bfilesize = #{bfilesize}
+					</if>
+				WHERE bno = #{bno}		
+			</otherwise>
+		</choose>
+	</insert>
+	<!-- 게시판 수정 끝 -->
+	
+	<!-- 게시판 게시글 삭제 시작 -->
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM fafiboardtable
+		WHERE bno = #{bno}
+	</delete>
+	<!-- 게시판 게시글 삭제 끝 -->
+	
+	<!-- 게시판 게시글 선택 삭제 시작 -->
+	<delete id="selectListDelete" parameterType="int">
+		DELETE FROM fafiboardtable
+		WHERE bno = #{bno}
+	</delete>
+	<!-- 게시판 게시글 선택 삭제 끝 -->
+	
+	<!-- ReplyDAO -->
+	<select id="replyListAll" resultType="com.fnf.DTO.ReplyDTO" parameterType="int">
+		SELECT * FROM fnfreply
+		WHERE bno = #{bno}
+		ORDER BY rno DESC
+	</select>
+	
+	<delete id="replyDelete" parameterType="int">
+		DELETE FROM fnfreply
+		WHERE rno = #{rno}
+	</delete>	
+
+	<insert id="replyInsert" parameterType="com.fnf.DTO.ReplyDTO">
+		INSERT INTO fnfreply(rno, content, writer, bno)		
+		VALUES(seq_fnfreply_rno.NEXTVAL, #{content}, #{writer}, #{bno})	
+	</insert>
+	
+	<update id="rpPlus">
+		UPDATE fafiboardtable SET breplycnt = breplycnt + 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<update id="ReplyCntMinus">
+		UPDATE fafiboardtable SET breplycnt = breplycnt - 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<delete id="replyDeleteAll" parameterType="int">
+		DELETE FROM fnfreply
+		WHERE bno = #{bno}
+	</delete>
+	
+	<!-- 동일 게시글 추천 여부 검색 -->
+	<select id="rec_check" parameterType="map" resultType="int">
+		select count(*) from liketable where bno = #{bno} and mno = #{mno}
+	</select>
+	
+	<!-- 게시글 추천 -->
+	<insert id="rec_update" parameterType="map">
+		insert into liketable values(#{bno}, #{mno})
+	</insert>
+	
+	<!-- 게시글 추천 취소 -->
+	<delete id="rec_delete" parameterType="map">
+		delete from liketable where bno = #{bno} and mno = #{mno}
+	</delete>
+	
+	<!-- 게시글 추천수 -->
+	<select id="rec_count" parameterType="int" resultType="int">
+		select count(*) from liketable where bno = #{bno}
+	</select>
+	
+	<update id="goodPlus">
+		UPDATE fafiboardtable SET bgoodcnt = bgoodcnt + 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<update id="goodMinus">
+		UPDATE fafiboardtable SET bgoodcnt = bgoodcnt - 1
+		WHERE bno = #{bno}
+	</update>
+	
+<!-- BoardDAO 내용 끝 -->
+
+
+<!-- 생산물관련부분!!!!시작!!!!!!! -->
+<select id="oneYearAll" resultType="com.fnf.DTO.ProductDTO">
+	SELECT * FROM farm_total WHERE name = #{name} AND year = (SELECT MAX(year) FROM farm_total)
+</select><!-- 해당 품목의 전지역 최근 1년의 생산량 조회 -->
+
+<select id="selectForGraph" parameterType="map" resultType="com.fnf.DTO.YearTempCropDTO">
+	
+	<if test='region =="seoul"'>
+           <![CDATA[SELECT t.year year, t.seoul temp, f.seoul crop]]>
+    </if>
+    <if test='region =="busan"'>
+           <![CDATA[SELECT t.year year, t.busan temp, f.busan crop]]>
+    </if>
+    <if test='region =="daegu"'>
+           <![CDATA[SELECT t.year year, t.daegu temp, f.daegu crop]]>
+    </if>
+    <if test='region =="incheon"'>
+           <![CDATA[SELECT t.year year, t.incheon temp, f.incheon crop]]>
+    </if>
+    <if test='region =="gwangju"'>
+           <![CDATA[SELECT t.year year, t.gwangju temp, f.gwangju crop]]>
+    </if>
+    <if test='region =="daejeon"'>
+           <![CDATA[SELECT t.year year, t.daejeon temp, f.daejeon crop]]>
+    </if>
+    <if test='region =="ulsan"'>
+           <![CDATA[SELECT t.year year, t.ulsan temp, f.ulsan crop]]>
+    </if>
+    <if test='region =="sejong"'>
+           <![CDATA[SELECT t.year year, t.sejong temp, f.sejong crop]]>
+    </if>
+    <if test='region =="gyeonggi"'>
+           <![CDATA[SELECT t.year year, t.gyeonggi temp, f.gyeonggi crop]]>
+    </if>
+    <if test='region =="gangwon"'>
+           <![CDATA[SELECT t.year year, t.gangwon temp, f.gangwon crop]]>
+    </if>
+    <if test='region =="chungcheongbuk"'>
+           <![CDATA[SELECT t.year year, t.chungcheongbuk temp, f.chungcheongbuk crop]]>
+    </if>
+    <if test='region =="chungcheongnam"'>
+           <![CDATA[SELECT t.year year, t.chungcheongnam temp, f.chungcheongnam crop]]>
+    </if>
+    <if test='region =="jeollabuk"'>
+           <![CDATA[SELECT t.year year, t.jeollabuk temp, f.jeollabuk crop]]>
+    </if>
+    <if test='region =="jeollanam"'>
+           <![CDATA[SELECT t.year year, t.jeollanam temp, f.jeollanam crop]]>
+    </if>
+    <if test='region =="gyeongsangbuk"'>
+           <![CDATA[SELECT t.year year, t.gyeongsangbuk temp, f.gyeongsangbuk crop]]>
+    </if>
+    <if test='region =="gyeongsangnam"'>
+           <![CDATA[SELECT t.year year, t.gyeongsangnam temp, f.gyeongsangnam crop]]>
+    </if>
+    <if test='region =="jeju"'>
+           <![CDATA[SELECT t.year year, t.jeju temp, f.jeju crop]]>
+    </if>
+        
+	
+	<![CDATA[
+	FROM temperature_year t, farm_total f
+	WHERE t.year>=#{year} AND f.name=#{name} AND t.year=f.year
+	]]>
+</select><!-- 지역, 시작년도, 품목 선택했을 때의 결과 -->
+
+<!-- MapDAO -->
+		<select id="mapView" parameterType="String" resultType="com.fnf.DTO.MapDTO">
+		SELECT * FROM fafiboardtable
+	</select>
+
+
+<!-- 생산물관련부분!!!!끝!!!!!!! -->
+
+</mapper>
+
